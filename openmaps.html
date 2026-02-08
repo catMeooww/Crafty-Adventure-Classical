@@ -130,7 +130,7 @@
             },500)
         }
 
-        firebase.database().ref("/maps/").on('value', function (snapshot) {
+        firebase.database().ref("classical/maps/").on('value', function (snapshot) {
             document.getElementById("output").innerHTML = "";
             snapshot.forEach(function (childSnapshot) {
                 childKey = childSnapshot.key; childData = childSnapshot.val();

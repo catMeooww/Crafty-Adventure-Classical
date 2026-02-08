@@ -31,11 +31,6 @@ function genMap(uploadedmapdata){
         } else {
             UpComponentRotation = 0;
         }
-        if (uploadedmapdata.components[i].break != undefined) {
-            UpBreaking = uploadedmapdata.components[i].break;
-        } else {
-            UpBreaking = "Unbreakable";
-        }
         if (uploadedmapdata.components[i].extra != undefined) {
             UpExtra = uploadedmapdata.components[i].extra;
         } else {
@@ -44,7 +39,7 @@ function genMap(uploadedmapdata){
 
         //place blocks
         if (UpComponentType != "deleted") {
-            placeBlock(UpComponentType, UpComponentX, UpComponentY, UpComponentRotation, UpComponentSolid, UpBreaking, UpExtra);
+            placeBlock(UpComponentType, UpComponentX, UpComponentY, UpComponentRotation, UpComponentSolid, UpExtra);
             console.log("uploaded block");
         }
     }
@@ -66,7 +61,7 @@ function initializeMap() {
         isRunning = true
     }else if(gettingFrom == "online"){
         isLoading = false
-        firebase.database().ref("/maps/" + selectedMapId + "/data").on("value", data => {
+        firebase.database().ref("classical/maps/" + selectedMapId + "/data").on("value", data => {
             if (!isLoading){
                 uploadedmapdata = data.val();
                 genMap(uploadedmapdata);

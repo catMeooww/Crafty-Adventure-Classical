@@ -8,7 +8,6 @@ placeMode = "grid";
 var selectedBlock = "grass";
 var selectedBlockSolid = true;
 var selectedBlockRotation = 0;
-var selectedBlockBreaking = "Unbreakable";
 var editingBlockIndex = 0;
 
 var ShowDevInfo = false;
@@ -64,10 +63,11 @@ function setup() {
   mousePlacer.scale = 0.8;
   mousePlacer.tint = "rgba(255,255,255,0.5)";
   mousePlacer.depth = 3;
+
+  frameRate(100);
 }
 
 function draw() {
-  frameRate(100);
   background("cyan");
 
   if (mapdata.ambient == "air") {
@@ -228,13 +228,13 @@ function mouseClicked() {
           }
         }
       } else {
-        placeBlock(selectedBlock, mousePlacer.position.x, mousePlacer.position.y, selectedBlockRotation, selectedBlockSolid, selectedBlockBreaking, {});
+        placeBlock(selectedBlock, mousePlacer.position.x, mousePlacer.position.y, selectedBlockRotation, selectedBlockSolid, {});
       }
     }
   }
 }
 
-function placeBlock(thisblock, placedPosX, placedPosY, thisBlockRotation, thisBlockIsSolid, breakbility, extra) {
+function placeBlock(thisblock, placedPosX, placedPosY, thisBlockRotation, thisBlockIsSolid, extra) {
   createdSprite = createSprite(placedPosX, placedPosY);
   createdSprite.depth = 1;
   if (thisblock == "grass") {
@@ -275,7 +275,6 @@ function placeBlock(thisblock, placedPosX, placedPosY, thisBlockRotation, thisBl
     y: placedPosY,
     isSolid: thisBlockIsSolid,
     rotation: thisBlockRotation,
-    break: breakbility,
     extra: extra
   });
 
@@ -429,7 +428,6 @@ function openBlockProperties() {
   document.getElementById('editingBlockPosX').innerHTML = mapdata.components[editingBlockIndex].x;
   document.getElementById('editingBlockPosY').innerHTML = mapdata.components[editingBlockIndex].y;
   document.getElementById('editingBlockPosR').innerHTML = mapdata.components[editingBlockIndex].rotation;
-  document.getElementById('editingBlockBreakbility').innerHTML = mapdata.components[editingBlockIndex].break;
 
   if (editingThisBlockType == 'ender') {
     document.getElementById("extraProperties").innerHTML = "<h3>Ender Pearl Config</h3><br><br><label>X:</label><input id='specialPropertiesInput1' type='number'><br><br><label>Y:</label><input id='specialPropertiesInput2' type='number''><br><br><button id='specialPropertiesBtn' onclick='setEnderTp()'>Set Tp</button>";
@@ -481,22 +479,6 @@ function moveEditingBlock(movement) {
   document.getElementById('editingBlockPosY').innerHTML = mapdata.components[editingBlockIndex].y;
   document.getElementById('editingBlockPosR').innerHTML = mapdata.components[editingBlockIndex].rotation;
   selectedBlockRotation = sprites[editingBlockIndex].rotation;
-}
-
-function breakbilityEditingBlock(n){
-  if (mapdata.components[editingBlockIndex].break == "Unbreakable"){
-    if (n == 1){
-      mapdata.components[editingBlockIndex].break = 1;
-    }
-  }else{
-    if (mapdata.components[editingBlockIndex].break == 1 && n == -1){
-      mapdata.components[editingBlockIndex].break = "Unbreakable";
-    }else{
-      mapdata.components[editingBlockIndex].break += n;
-    }
-  }
-  selectedBlockBreaking = mapdata.components[editingBlockIndex].break;
-  document.getElementById('editingBlockBreakbility').innerHTML = mapdata.components[editingBlockIndex].break;
 }
 
 //extra

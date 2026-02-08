@@ -34,11 +34,6 @@ function handle_file_select(evt) {
             }else{
                 UpComponentRotation = 0;
             }
-            if(uploadedmapdata.components[i].break != undefined){
-                UpBreaking = uploadedmapdata.components[i].break;
-            }else{
-                UpBreaking = "Unbreakable";
-            }
             if(uploadedmapdata.components[i].extra != undefined){
                 UpExtra = uploadedmapdata.components[i].extra;
             }else{
@@ -47,7 +42,7 @@ function handle_file_select(evt) {
 
             //place blocks
             if(UpComponentType != "deleted"){
-            placeBlock(UpComponentType,UpComponentX,UpComponentY,UpComponentRotation,UpComponentSolid,UpBreaking,UpExtra);
+            placeBlock(UpComponentType,UpComponentX,UpComponentY,UpComponentRotation,UpComponentSolid,UpExtra);
             console.log("uploaded block");
             }
         }
@@ -88,7 +83,7 @@ function download() {
 }
 
 function publish(){
-    firebase.database().ref("/maps/").push({
+    firebase.database().ref("classical/maps/").push({
             by:user,
             data:mapdata
     });

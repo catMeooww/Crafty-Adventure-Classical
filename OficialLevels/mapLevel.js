@@ -39,11 +39,12 @@ function setup() {
   playerSprite.depth = 2;
   playerHolder = createSprite(0, 35, 15, 5);
   playerHolder.visible = false;
+
+  frameRate(100);
 }
 
 function draw() {
-  frameRate(100);
-  background("cyan");
+  background("#8fd3f2");
   document.getElementById("mapId").innerHTML = "Map: " + mapdata.mapname;
   document.getElementById("mapId_menu").innerHTML = "Map Id: " + selectedMapId;
 
@@ -144,7 +145,7 @@ function testForInGround() {
 }
 
 //loading map
-function placeBlock(thisblock, placedPosX, placedPosY, thisBlockRotation, thisBlockIsSolid, breakbility, extra) {
+function placeBlock(thisblock, placedPosX, placedPosY, thisBlockRotation, thisBlockIsSolid, extra) {
   createdSprite = createSprite(placedPosX, placedPosY);
   createdSprite.depth = 1;
   if (thisblock == "grass") {
@@ -185,7 +186,6 @@ function placeBlock(thisblock, placedPosX, placedPosY, thisBlockRotation, thisBl
     y: placedPosY,
     isSolid: thisBlockIsSolid,
     rotation: thisBlockRotation,
-    break: breakbility,
     extra: extra
   });
 
